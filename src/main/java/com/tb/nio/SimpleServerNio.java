@@ -14,6 +14,17 @@ import java.util.Iterator;
  * Created by yangzhuo02 on 2016/1/12.
  */
 public class SimpleServerNio {
+
+    private Selector selector = null;
+
+    public SimpleServerNio() {
+        try {
+            selector = Selector.open();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         SimpleServerNio simpleServerNio = new SimpleServerNio();
         simpleServerNio.testRead();
@@ -24,9 +35,6 @@ public class SimpleServerNio {
             ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
             serverSocketChannel.configureBlocking(false);
             serverSocketChannel.bind(new InetSocketAddress(5508));
-
-
-            Selector selector = Selector.open();
             SelectionKey key = serverSocketChannel.register(selector,
                     SelectionKey.OP_ACCEPT);
 
@@ -41,22 +49,20 @@ public class SimpleServerNio {
                             continue;
                         } else if (selectionKey.isAcceptable()) {
                             System.out.println("is accept");
+                            doAccept(selectionKey);
                         } else if (selectionKey.isReadable()) {
                             System.out.println("is readable");
-                            SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
-                            ByteBuffer buffer = ByteBuffer.allocate(1024);
-                            int result = socketChannel.read(buffer);
-                            while (result != -1) {
-                                System.out.println(buffer);
-                                result = socketChannel.read(buffer);
-                            }
+
+                            doRead(selectionKey);
                         } else if (selectionKey.isConnectable()) {
                             System.out.println("is connect");
                         } else if (selectionKey.isWritable()) {
                             System.out.println("is write");
                         }
+                        iterator.remove();
                     }
                 }
+
             }
 
 
@@ -64,6 +70,31 @@ public class SimpleServerNio {
             e.printStackTrace();
         } finally {
         }
+    }
+
+    private void doAccept(SelectionKey selectionKey) {
+        try {
+            ServerSocketChannel serverSocketChannel = (ServerSocketChannel) selectionKey.channel();
+            SocketChannel socketChannel = serverSocketChannel.accept();
+            socketChannel.configureBlocking(false);
+            socketChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    private void doRead(SelectionKey selectionKey) {
+        SocketChannel socketChannel = (SocketChannel)selectionKey.channel();
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        try {
+            socketChannel.read(buffer);
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        buffer.flip();
+        System.out.println(buffer);
+
     }
 
 }

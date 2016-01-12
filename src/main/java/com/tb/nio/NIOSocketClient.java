@@ -38,27 +38,27 @@ public class NIOSocketClient extends Thread {
 	}
 
 	public void run() {
-		while (true) {
+//		while (true) {
 			try {
-				// Ð´ÏûÏ¢µ½·þÎñÆ÷¶Ë
+				// Ð´ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				writeMessage();
 
-				int select = selector.select();
-				if (select > 0) {
-					Set<SelectionKey> keys = selector.selectedKeys();
-					Iterator<SelectionKey> iter = keys.iterator();
-					while (iter.hasNext()) {
-						SelectionKey sk = iter.next();
-						if (sk.isReadable()) {
-							readMessage(sk);
-						}
-						iter.remove();
-					}
-				}
+//				int select = selector.select();
+//				if (select > 0) {
+//					Set<SelectionKey> keys = selector.selectedKeys();
+//					Iterator<SelectionKey> iter = keys.iterator();
+//					while (iter.hasNext()) {
+//						SelectionKey sk = iter.next();
+//						if (sk.isReadable()) {
+//							readMessage(sk);
+//						}
+//						iter.remove();
+//					}
+//				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+//		}
 	}
 
 	public void readMessage(SelectionKey sk) throws IOException,
@@ -97,7 +97,7 @@ public class NIOSocketClient extends Thread {
 		socketChannel.configureBlocking(false);
 		socketChannel.register(selector, SelectionKey.OP_READ);
 
-		// Á¬½Óµ½server
+		// ï¿½ï¿½ï¿½Óµï¿½server
 		socketChannel.connect(addr);
 
 		while (!socketChannel.finishConnect()) {
@@ -106,7 +106,7 @@ public class NIOSocketClient extends Thread {
 	}
 
 	/**
-	 * Í£Ö¹¿Í»§¶Ë
+	 * Í£Ö¹ï¿½Í»ï¿½ï¿½ï¿½
 	 */
 	private void stopServer() {
 		try {

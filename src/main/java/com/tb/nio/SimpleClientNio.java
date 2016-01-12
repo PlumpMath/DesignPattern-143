@@ -23,18 +23,6 @@ public class SimpleClientNio {
     private void testWrite() {
 
         try {
-//            SocketChannel socketChannel = SocketChannel.open();
-//            Selector selector = Selector.open();
-//            socketChannel.configureBlocking(false);
-//            SelectionKey selectionKey = socketChannel.register(selector, SelectionKey.OP_READ);
-//
-//
-//
-//            boolean isConnect = socketChannel.connect(new InetSocketAddress(5508));
-//
-//            System.out.println(isConnect);
-
-
             InetSocketAddress addr = new InetSocketAddress(5508);
             SocketChannel socketChannel = SocketChannel.open();
 
@@ -42,7 +30,7 @@ public class SimpleClientNio {
             socketChannel.configureBlocking(false);
             socketChannel.register(selector, SelectionKey.OP_READ);
 
-            // 连接到server
+            // 锟斤拷锟接碉拷server
             boolean isConnect = socketChannel.connect(addr);
             while (!socketChannel.finishConnect()) {
                 System.out.println("check finish connection");
@@ -57,6 +45,7 @@ public class SimpleClientNio {
 
             System.out.println("client");
             socketChannel.close();
+            selector.close();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

@@ -47,9 +47,9 @@ public class NIOSocketServer extends Thread {
                         if (key.isAcceptable()) {
                             doAcceptable(key);
                         }
-                        if (key.isWritable()) {
-                            doWriteMessage(key);
-                        }
+//                        if (key.isWritable()) {
+//                            doWriteMessage(key);
+//                        }
                         if (key.isReadable()) {
                             doReadMessage(key);
                         }
@@ -66,7 +66,7 @@ public class NIOSocketServer extends Thread {
     }
 
     /**
-     * ³õÊ¼»¯·þÎñÆ÷¶Ë³ÌÐò£¬¿ªÊ¼¼àÌý¶Ë¿Ú
+     * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ò£¬¿ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½
      *
      * @throws IOException
      * @throws ClosedChannelException
@@ -81,7 +81,7 @@ public class NIOSocketServer extends Thread {
     }
 
     /**
-     * Í£Ö¹·þÎñÆ÷¶Ë
+     * Í£Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private void stopServer() {
         try {
@@ -97,7 +97,7 @@ public class NIOSocketServer extends Thread {
     }
 
     /**
-     * ¶ÔÐÂµÄ¿Í»§¶ËÁ¬½Ó½øÐÐ´¦Àí
+     * ï¿½ï¿½ï¿½ÂµÄ¿Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½
      *
      * @param key
      * @throws IOException
@@ -113,7 +113,7 @@ public class NIOSocketServer extends Thread {
     }
 
     /**
-     * Ð´ÏûÏ¢µ½¿Í»§¶Ë
+     * Ð´ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½
      *
      * @param key
      * @throws IOException
@@ -131,7 +131,7 @@ public class NIOSocketServer extends Thread {
     }
 
     /**
-     * ¶ÁÈ¡¿Í»§¶Ë´«µÝ¹ýÀ´µÄÏûÏ¢
+     * ï¿½ï¿½È¡ï¿½Í»ï¿½ï¿½Ë´ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      *
      * @param key
      * @throws IOException
@@ -161,7 +161,7 @@ public class NIOSocketServer extends Thread {
     }
 
     /**
-     * ÒÑÁ¬½Ó
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * @param key
      */
