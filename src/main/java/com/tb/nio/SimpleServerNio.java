@@ -113,8 +113,5 @@ public class SimpleServerNio {
             }
             ex.printStackTrace();
         }
-
-
     }
-
 }
