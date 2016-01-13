@@ -26,8 +26,11 @@ public class SimpleServerNio {
     }
 
     public static void main(String[] args) {
+
         SimpleServerNio simpleServerNio = new SimpleServerNio();
+        System.out.println("Æô¶¯·þÎñ");
         simpleServerNio.testRead();
+
     }
 
     private void testRead() {
@@ -85,15 +88,32 @@ public class SimpleServerNio {
     }
 
     private void doRead(SelectionKey selectionKey) {
-        SocketChannel socketChannel = (SocketChannel)selectionKey.channel();
+        SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
         ByteBuffer buffer = ByteBuffer.allocate(1024);
+
+        int result = -1;
+
         try {
-            socketChannel.read(buffer);
-        }catch (IOException ex) {
+            result = socketChannel.read(buffer);
+
+            if (result == -1) {
+                socketChannel.close();
+                selectionKey.cancel();
+            } else {
+                buffer.flip();
+                System.out.println(buffer);
+            }
+
+        } catch (IOException ex) {
+            try {
+                socketChannel.close();
+                selectionKey.cancel();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             ex.printStackTrace();
         }
-        buffer.flip();
-        System.out.println(buffer);
+
 
     }
 
