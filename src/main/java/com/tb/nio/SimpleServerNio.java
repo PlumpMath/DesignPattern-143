@@ -28,7 +28,7 @@ public class SimpleServerNio {
     public static void main(String[] args) {
 
         SimpleServerNio simpleServerNio = new SimpleServerNio();
-        System.out.println("Æô¶¯·þÎñ");
+        System.out.println("server");
         simpleServerNio.testRead();
 
     }
