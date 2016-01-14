@@ -34,6 +34,7 @@ public class SimpleServerNio {
     }
 
     private void testRead() {
+
         try {
             ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
             serverSocketChannel.configureBlocking(false);
