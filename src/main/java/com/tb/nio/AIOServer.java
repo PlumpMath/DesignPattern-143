@@ -40,7 +40,7 @@ public class AIOServer {
                         e.printStackTrace();
                     } finally {
                     }
-                    if(num > 0) {
+                    if (num > 0) {
                         System.out.println("success");
                     }
                 }
@@ -51,7 +51,7 @@ public class AIOServer {
                 }
             });
             channelGroup.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
-        } catch (IOException  | InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         } finally {
         }
