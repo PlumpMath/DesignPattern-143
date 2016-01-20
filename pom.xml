@@ -8,5 +8,49 @@
     <artifactId>designpattern</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <cglib.version>3.2.0</cglib.version>
+    </properties>
+
+    <!--设置远程仓库地址-->
+    <repositories>
+        <repository>
+            <id>oschina</id>
+            <name>oschina Repository</name>
+            <url>http://maven.oschina.net/content/groups/public/</url>
+            <releases>
+                <updatePolicy>daily</updatePolicy><!-- never,always,interval n -->
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy><!-- fail,ignore -->
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+    <!--maven插件的远程服务器-->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <name>local private nexus</name>
+            <url>http://maven.oschina.net/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
