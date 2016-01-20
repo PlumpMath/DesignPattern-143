@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="off" monitorInterval="1800">
+
+    <properties>
+        <property name="LOG_HOME">D://logs</property>
+        <property name="ERROR_LOG_FILE_NAME">error</property>
+    </properties>
+
+
+    <Appenders>
+        <!--日志打印到控制台上-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-15p (%F:%L) - %m%n" />
+        </Console>
+
+        <RollingRandomAccessFile name="ErrorLog"
+                                 fileName="${LOG_HOME}/${ERROR_LOG_FILE_NAME}.log"
+                                 filePattern="${LOG_HOME}/${ERROR_LOG_FILE_NAME}.log.%d{yyyy-MM-dd}.gz">
+            <PatternLayout
+                    pattern="%d %-5p (%F:%L) - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1kb"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+
+
+        <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，这个也挺有用的，适合临时测试用-->
+        <File name="log" fileName="log/test.log" append="false">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </File>
+
+        <!--这个会打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <RollingFile name="RollingFile" fileName="logs/app.log"
+                     filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="50MB"/>
+        </RollingFile>
+
+
+    </Appenders>
+
+    <Loggers>
+        <!-- 3rdparty Loggers -->
+        <logger name="org.springframework.core" level="info">
+        </logger>
+        <logger name="org.springframework.beans" level="info">
+        </logger>
+        <logger name="org.springframework.context" level="info">
+        </logger>
+        <logger name="org.springframework.web" level="info">
+        </logger>
+
+        <logger name="com.meituan.gct.shop.promo" level="error" includeLocation="true" additivity="false">
+            <appender-ref ref="ErrorLog"/>
+            <appender-ref ref="Console"/>
+        </logger>
+
+        <logger name="com.tb.log.LogTest" level="trace" additivity="false">
+            <appender-ref ref="ErrorLog"/>
+        </logger>
+
+        <root level="debug" includeLocation="true">
+            <appender-ref ref="Console"/>
+        </root>
+    </Loggers>
+</Configuration>
