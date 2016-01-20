@@ -1,4 +1,4 @@
-package com.tb.proxy.staticproxy;
+package com.tb.proxy.dynamicproxyjava;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
