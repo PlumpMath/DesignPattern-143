@@ -32,7 +32,6 @@ public class TestConditionList {
         } finally {
             reentrantLock.unlock();
         }
-
     }
 
     public void remove() {
@@ -53,7 +52,6 @@ public class TestConditionList {
     public static void main(String[] args) {
         final TestConditionList testConditionList = new TestConditionList();
         long start = System.currentTimeMillis();
-
 
         ExecutorService executorService = Executors.newFixedThreadPool(6);
         executorService.execute(new Runnable() {
